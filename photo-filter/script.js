@@ -29,6 +29,15 @@ function handleUpdate() {
   }
 }
 
+function resetFilters() {
+    input.forEach(input => {
+        const suffix = this.dataset.sizing || '';
+        document.documentElement.style.setProperty(`--${input.name}`, '')
+        input.value = input.defaultValue
+        input.nextElementSibling.value = input.value
+    })
+}
+
 function viewBgImage(src) {
   const img = new Image();
   img.src = src;
@@ -76,10 +85,6 @@ const showNextPicture = () => {
   const imageSrc = base + hours + images[index];
   viewBgImage(imageSrc);
   i++;
-  btnNext.disabled = true;
-  setTimeout(function () {
-    btnNext.disabled = false;
-  }, 100);
 };
 
 const togglefullscreen = () => {
@@ -91,7 +96,9 @@ const togglefullscreen = () => {
 };
 
 input.forEach(input => input.addEventListener('input', handleUpdate));
+btnReset.addEventListener('click', resetFilters);
 btnNext.addEventListener('click', showNextPicture);
+btnNext.addEventListener('click', resetFilters);
 
 buttons.forEach(btn =>
   btn.addEventListener('click', function (event) {
