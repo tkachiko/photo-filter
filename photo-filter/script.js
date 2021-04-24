@@ -86,6 +86,8 @@ function loadPicture (e) {
 function drawImage() {
   const canvas = document.createElement('canvas');
   const img = new Image();
+  imgTag.setAttribute('crossOrigin', 'Anonymous');
+  img.src = imgTag.src;
   img.onload = function () {
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
@@ -101,8 +103,6 @@ function drawImage() {
     link.click();
     link = 0;
   };
-  img.setAttribute('crossOrigin', 'Anonymous');
-  img.src = imgTag.src;
 }
 
 const togglefullscreen = () => {
